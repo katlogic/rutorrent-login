@@ -25,7 +25,11 @@ Second, we need to direct the SCGI/RPC plugin at proper RPC socket based on who'
     $scgi_port = 0;
     session_start();
     $scgi_host = "unix:////home/".$_SESSION['login']."/.rtorrent.rpc";
-    
+    $_SERVER['PHP_AUTH_USER']=$_SERVER['REMOTE_USER']=$_SESSION['login'];
+
+The `REMOTE_USER` variable override must be in the config file because the plugin cannot
+hook into all places expecting it otherwise.
+
 Naturally, there must be working SCGI socket at /home/user/.rtorrent.rpc, eg.
 
     scgi_local=/home/user/.rtorrent.rpc
