@@ -46,8 +46,8 @@ Finally, you have to configure your authentication scheme in `plugins/login/conf
        return false;
     }
     
-The `auth_ok()` function provides great deal flexibility. Not only you can use arbitrary database setup,
-but for example you can invoke a sudo script which launches rtorrent in screen,
+The `auth_ok()` function provides great deal of flexibility. Not only you can use arbitrary database setup,
+but you can also invoke a sudo script which launches rtorrent in screen on successful login,
 and fix permissions of `/home/user/.rtorrent.rpc` (because it must be R/W accessible by the webserver).
 
 Security
