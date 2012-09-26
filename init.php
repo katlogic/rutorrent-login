@@ -1,8 +1,7 @@
 <?php
 eval(getPluginConf("login"));
 session_start();
-$luser = $_SESSION['login'];
-if ($luser) $_SERVER['REMOTE_USER']=$luser;
+$_SERVER['PHP_AUTH_USER']=$_SERVER['REMOTE_USER']=$_SESSION['login'];
 $me = getUser();
 $jResult .= "plugin.me = '" . $me . "';";
 
