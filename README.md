@@ -22,12 +22,14 @@ Enable the RPC plugin for all users by default by putting the following snippet 
 
 Second, we need to direct the SCGI/RPC plugin at proper RPC socket based on who's logged in, in your `conf/config.php`:
 
-    $scgi_port = 0;
-    session_start();
-    $scgi_host = "unix:////home/".$_SESSION['login']."/.rtorrent.rpc";
-    $_SERVER['PHP_AUTH_USER']=$_SERVER['REMOTE_USER']=$_SESSION['login'];
+     $scgi_port = 0;
+     session_start();
+     $ruser=$_SERVER[DOCUMENT_ROOT]?$_SESSION[login]:$_SERVER[argv][1];
+     $scgi_host = "unix:////home/".$ruser."/.rtorrent.rpc";
+     $_SERVER[REMOTE_USER]=$_SERVER[PHP_AUTH_USER]=$ruser;
 
-The `REMOTE_USER` variable override must be in the config file because the plugin cannot
+
+The complex `REMOTE_USER` variable override must be in the config file because the plugin cannot
 hook into all places expecting it otherwise.
 
 Naturally, there must be working SCGI socket at /home/user/.rtorrent.rpc, eg.
